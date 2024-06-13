@@ -1,0 +1,23 @@
+@startuml
+!define RECTANGLE class
+title OAuth2.0 Authentication with LinkedIn
+
+actor Browser
+boundary Consolidate as App
+boundary LinkedInAuth as LinkedIn_Auth_Server
+boundary LinkedInAPI as LinkedIn_API
+
+Browser -> App : Access protected resource
+App -> Browser : Redirect to LinkedIn Auth
+Browser -> LinkedIn_Auth_Server : \n GET authorization-uri\nhttps://www.linkedin.com/oauth/v2/authorization\n?response_type=code&client_id=${LINKEDIN_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}
+note right of LinkedIn_Auth_Server: \n LinkedIn login page displayed\nUser enters login and password
+LinkedIn_Auth_Server -> Browser : \n 302 Found\nLocation: ${REDIRECT_URI}?code=<AUTH_CODE>
+Browser -> App : \n GET /login/oauth2/code/linkedin?code=<AUTH_CODE>
+App -> LinkedIn_Auth_Server : \n POST token-uri\nhttps://www.linkedin.com/oauth/v2/accessToken\nbody: { "grant_type": "authorization_code", "code": "<AUTH_CODE>", "redirect_uri": "${REDIRECT_URI}", "client_id": "${CLIENT_ID}", "client_secret": "${CLIENT_SECRET}" }
+LinkedIn_Auth_Server --> App : \n 200 OK\nbody: { "access_token": "<ACCESS_TOKEN>", "token_type": "Bearer", "expires_in": 5184000, "id_token": "<ID_TOKEN>" }
+App -> LinkedIn_API : \n GET user-info-uri\nhttps://api.linkedin.com/v2/userinfo\nAuthorization: Bearer <ACCESS_TOKEN>
+LinkedIn_API --> App : \n 200 OK\nbody: { "given_name": "<USER_NAME>", "family_name": "<USER_SURNAME>" }
+App -> LinkedIn_Auth_Server : \n GET jwk-set-uri\nhttps://www.linkedin.com/oauth/openid/jwks
+LinkedIn_Auth_Server --> App : \n 200 OK\nbody: {<PAYLOAD>}
+App -> Browser : Display user information
+@enduml
