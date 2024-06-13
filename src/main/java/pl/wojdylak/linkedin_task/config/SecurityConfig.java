@@ -49,8 +49,8 @@ public class SecurityConfig {
                 )
                 .oauth2Login(oauthLoginConfig -> oauthLoginConfig
                         .loginPage("/login")
-                        .authorizationEndpoint((authorizationEndpointConfig ->
-                                authorizationEndpointConfig.authorizationRequestResolver(
+                        .authorizationEndpoint((authorizationEndpointConfig -> authorizationEndpointConfig
+                                .authorizationRequestResolver(
                                         requestResolver(this.clientRegistrationRepository)
                                 ))
                         )
