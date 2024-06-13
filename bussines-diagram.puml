@@ -1,0 +1,18 @@
+@startuml
+title Login and Authorization Process with LinkedIn
+
+actor User
+boundary MyApp as My_Application
+boundary LinkedIn as LinkedIn
+
+User -> My_Application : Wants to access a protected resource
+My_Application -> User : Redirect to LinkedIn login page
+User -> LinkedIn : Enters username and password
+LinkedIn -> User : Redirects back to the application with authorization code
+User -> My_Application : Authorization code in URL
+My_Application -> LinkedIn : Sends code to get token
+LinkedIn -> My_Application : Returns access token
+My_Application -> LinkedIn : Requests user information
+LinkedIn -> My_Application : Provides user information
+My_Application -> User : Displays user information
+@enduml
