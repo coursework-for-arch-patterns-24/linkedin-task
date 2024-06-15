@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller("/accounts")
 
-public class AccountsController {
-
+public class AccountsController
+{
     @GetMapping("/{id}")
-    public ResponseEntity<String>  x(@PathVariable("id") String  id){
-        if(id == null){
+    public ResponseEntity<String> x(@PathVariable("id") String id)
+    {
+        if(id == null)
+        {
             return ResponseEntity.badRequest().body("id is missing");
         }
         return ResponseEntity.ok("success");

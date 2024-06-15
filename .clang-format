@@ -1,0 +1,132 @@
+---
+# Required clang-format version: 16
+
+########## General
+Language: Java
+BasedOnStyle: Google
+
+IndentWidth: 4
+TabWidth: 4
+ColumnLimit: 100
+MaxEmptyLinesToKeep: 2
+LineEnding: LF # clang-format 16
+InsertNewlineAtEOF: true # clang-format 16
+UseTab: Never
+
+########## Indent
+AccessModifierOffset: 0
+ConstructorInitializerIndentWidth: 4
+ContinuationIndentWidth: 4
+PPIndentWidth: -1
+
+IndentAccessModifiers: false
+IndentCaseBlocks: false
+IndentCaseLabels: true
+IndentExternBlock: AfterExternBlock
+IndentGotoLabels: false
+IndentPPDirectives: BeforeHash
+IndentWrappedFunctionNames: true
+
+LambdaBodyIndentation: Signature
+NamespaceIndentation: None
+
+########## Spaces
+SpaceAfterLogicalNot: false
+SpaceAroundPointerQualifiers: Before
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCaseColon: false
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeParens: Never
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceBeforeSquareBrackets: false
+SpaceInEmptyBlock: true
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 2
+SpacesInAngles: false
+SpacesInConditionalStatement: false
+SpacesInContainerLiterals: false
+SpacesInLineCommentPrefix:
+  Minimum: "1"
+  Maximum: "1"
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+
+########## Breaks
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterCaseLabel: true
+  AfterClass: true
+  AfterControlStatement: Always
+  AfterEnum: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterStruct: true
+  AfterUnion: true
+  AfterExternBlock: true
+  BeforeCatch: true
+  BeforeElse: true
+  BeforeLambdaBody: false
+  BeforeWhile: true
+  IndentBraces: false
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: true
+
+BreakAfterAttributes: Always # clang-format 16
+BreakAfterJavaFieldAnnotations: true
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializers: BeforeComma
+BreakInheritanceList: BeforeColon
+BreakStringLiterals: false
+AlwaysBreakAfterReturnType: None
+AlwaysBreakBeforeMultilineStrings: false
+AlwaysBreakTemplateDeclarations: "Yes"
+
+########## Alignment
+AlignAfterOpenBracket: DontAlign
+AlignArrayOfStructures: Left
+AlignConsecutiveMacros: true
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignEscapedNewlines: Left
+AlignOperands: true
+AlignTrailingComments: false
+
+PointerAlignment: Left
+QualifierAlignment: Leave
+ReferenceAlignment: Left
+
+########## Import sorting and grouping
+JavaImportGroups:
+  ["org.springframework", "jakarta", "edu.agh.is.consolidate", "pl.kluczka.linkedin_task", "java"]
+
+########## Other
+AllowAllArgumentsOnNextLine: false
+AllowAllConstructorInitializersOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortBlocksOnASingleLine: Always
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: Empty
+AllowShortLoopsOnASingleLine: false
+BinPackArguments: false
+BinPackParameters: false
+BitFieldColonSpacing: Both
+CompactNamespaces: false
+DeriveLineEnding: true
+EmptyLineAfterAccessModifier: Leave
+EmptyLineBeforeAccessModifier: Always
+FixNamespaceComments: true
+JavaScriptQuotes: Double
+IntegerLiteralSeparator: # clang-format 16
+  Binary: 8
+  Decimal: 3
+  Hex: -1
+KeepEmptyLinesAtTheStartOfBlocks: false
+PackConstructorInitializers: Never
+ReflowComments: true
+SeparateDefinitionBlocks: Always
