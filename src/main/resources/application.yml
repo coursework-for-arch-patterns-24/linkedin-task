@@ -1,0 +1,28 @@
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    mode: HTML
+  logging:
+    level:
+      org.springframework.security: DEBUG
+      org.springframework.web: DEBUG
+  security:
+    oauth2:
+      client:
+        registration:
+          linkedin:
+            client-id: "77gm0yqzqdp30o"
+            client-secret: "WPL_AP1.Z7onNkVnyYCO0orM.RzbePA=="
+            scope: openid, profile, email
+            redirect-uri: "http://localhost:8080/login/oauth2/code/linkedin"
+            authorization-grant-type: authorization_code
+            client-authentication-method: client_secret_post
+
+        provider:
+          linkedin:
+            authorization-uri: https://www.linkedin.com/oauth/v2/authorization
+            token-uri: https://www.linkedin.com/oauth/v2/accessToken
+            user-info-uri: https://api.linkedin.com/v2/userinfo
+            jwk-set-uri: https://www.linkedin.com/oauth/openid/jwks
