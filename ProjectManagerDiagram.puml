@@ -1,0 +1,17 @@
+@startuml
+title LinkedIn OAuth Login - Non-Technical Overview
+
+actor User
+participant "ConSOLIDate.org" as App
+participant "LinkedIn" as LinkedIn
+
+User -> App: Open ConSOLIDate.org Home Page 
+App -> LinkedIn:  Login through linkedin
+
+LinkedIn -> User: Ask for permissions
+User -> LinkedIn: Provide consent
+
+LinkedIn -> App: Login successful
+App -> User: Display welcome page with user's name
+
+@enduml

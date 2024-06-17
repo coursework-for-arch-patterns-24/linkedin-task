@@ -1,0 +1,28 @@
+@startuml
+title LinkedIn OAuth Login - Developer Detailed Sequence
+
+actor User
+participant "ConSOLIDate.org" as App
+participant "LinkedIn" as LinkedIn
+
+User -> App: Access ConSOLIDate.org Home Page (GET "localhost:8080/")
+App -> User: Display Home Page with "Login by LinkedIn" Button (status 200, template: home.html)
+
+User -> App: Click "Login by LinkedIn button"
+App -> LinkedIn: Redirect to LinkedIn Authorization Endpoint \
+( POST https://www.linkedin.com/oauth/v2/authorization) with clientID, redirectURI and scope 
+
+LinkedIn -> User: Send back LinkedIn Login Page
+User -> LinkedIn: Enter Credentials and Consent
+LinkedIn -> User: 302 Redirect with Authorization Code
+
+User -> App: GET http://localhost:8080/login/oauth2/code/linkedin with authorization code
+
+App -> LinkedIn: Exchange Code for Access Token (POST https://www.linkedin.com/oauth/v2/accessToken (token URI) with authorization code)
+LinkedIn -> App: Return Access Token ( status 200, token) 
+App -> LinkedIn: Request User Information (GET https://api.linkedin.com/v2/userinfo (user info uri) with gained token)
+
+LinkedIn -> App: Return User Information (status 200, given name, family name)
+App -> User: Display Welcome Message with User's Name ( status 200, welcome.html)
+
+@enduml
