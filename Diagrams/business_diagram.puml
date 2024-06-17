@@ -1,0 +1,23 @@
+@startuml
+
+
+actor Client
+participant "ConSOLiDate" as consolidate
+participant "3rd party OAUTH provider" as OauthServer
+participant "Resource Server" as ResourceServer
+
+Client -> consolidate: Try to login through OAUTH (LinkedIn)
+consolidate -> OauthServer: Authorize web app (consolidate)
+
+OauthServer -> Client: Consent page (request user's consent)
+Client -> OauthServer: Consent approval
+OauthServer -> consolidate: Consent given
+consolidate -> Client: Successfully logged in
+
+Client -> consolidate: Show me profile information
+consolidate -> ResourceServer: Get profile information
+ResourceServer -> consolidate: Return profile information
+consolidate -> Client: Display profile information
+
+
+@enduml
