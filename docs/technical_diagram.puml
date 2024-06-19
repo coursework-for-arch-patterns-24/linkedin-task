@@ -1,0 +1,37 @@
+@startuml
+actor "User" as client
+participant "Consolidate" as resourceServer
+participant "LinkedIn" as authServer
+
+client -> resourceServer: GET base_url/
+activate client
+activate resourceServer
+resourceServer -> client: OK <home page>
+deactivate client
+deactivate resourceServer
+client -> resourceServer: GET base_url/oauth2/authorization/linkedin
+activate client
+activate resourceServer
+resourceServer -> authServer: REDIRECT https://www.linkedin.com/...?response_typee&client_id&scope&state&redirect_uri
+deactivate resourceServer
+activate authServer
+authServer -> client: OK <user credentials form>
+deactivate authServer
+deactivate client
+
+client -> authServer: POST <user credentials>
+activate client
+activate authServer
+authServer -> client: FOUND <authorization code>
+deactivate authServer
+client -> resourceServer: GET base_url/login/oauth2/code/linkedin?authorization_code
+activate resourceServer
+resourceServer -> authServer: GET access_token?authorization_code&client_secret&client_id
+
+activate authServer
+authServer -> resourceServer: OK <access_token>
+deactivate authServer
+resourceServer -> client: OK <page with user data>
+deactivate resourceServer
+deactivate client
+@enduml

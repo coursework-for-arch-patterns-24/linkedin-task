@@ -1,0 +1,25 @@
+@startuml
+actor "User" as client
+participant "Consolidate" as resourceServer
+participant "LinkedIn" as authServer
+
+client -> resourceServer: login request
+activate client
+activate resourceServer
+resourceServer -> authServer: redirect with auth request
+deactivate resourceServer
+activate authServer
+authServer -> client: empty login form
+deactivate authServer
+deactivate client
+
+client -> authServer: filled login form
+activate client
+activate authServer
+authServer -> resourceServer: redirect with login success confirmation
+deactivate authServer
+activate resourceServer
+resourceServer -> client: page with user data
+deactivate resourceServer
+deactivate client
+@enduml
