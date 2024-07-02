@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>ConSOLIDate.org</title>
+</head>
+
+<body>
+    <div>
+        <h2>Welcome
+            <span th:text="${name}"></span>
+            <span th:text="${surname}"></span>
+            in ConSOLIDate.org
+        </h2>
+    </div>
+    <div sec:authorize="!isAuthenticated()">
+        <h2>Login using one of the listed providers:</h2>
+        <div>
+            <a href="/oauth2/authorization/linkedin">
+                <img th:src="@{/images/LinkedIn-SignIn.png}" alt="Sign in with LinkedIn">
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>

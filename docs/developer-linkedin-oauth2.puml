@@ -1,0 +1,47 @@
+@startuml ConsolidateLinkedinOAuth2Developer
+!define RECTANGLE class
+title OAuth2.0 Authentication with LinkedIn
+
+actor "User browser" as User
+boundary ConSOLIDate
+boundary "LinkedIn auth server" as LinkedInAuth
+boundary "LinkedIn API" as LinkedInApi
+
+alt Client tries to access restricted resource
+    User -> ConSOLIDate : GET (on protected endpoint)
+    ConSOLIDate -> User : Response 302 "Found" \
+        \n (with redirect URI to client login page)
+end
+User -> ConSOLIDate : Request client login
+ConSOLIDate -> User : Response 303 "See other" - Redirect to LinkedIn login prompt
+User -> LinkedInAuth : GET https://www.linkedin.com/oauth/v2/authorization \
+    \n  (with client ID, redirect URI, response type, scope)
+LinkedInAuth -> User : Response 200 "OK" - Return LinkedIn login page
+alt Client provides authentication information and consents to share data
+    note right of User: Client provides authentication information and consents to share data
+    User -> LinkedInAuth : POST (internal LinkedIn login submit handling)
+    LinkedInAuth -> User : Response 302 "Found" \
+        \n (with redirect URI and auth code)
+    User -> ConSOLIDate : GET /login/oauth2/code/linkedin \
+        \n (with auth code)
+    ConSOLIDate -> LinkedInAuth : POST https://www.linkedin.com/oauth/v2/accessToken \
+        \n  (with grant type, auth code, redirect URI, client ID, client secret)
+    LinkedInAuth --> ConSOLIDate : Response 200 "OK" \
+        \n  (with access token, token type, expiration time, ID token)
+    ConSOLIDate -> LinkedInApi : GET https://api.linkedin.com/v2/userinfo \
+        \n (with access token)
+    LinkedInApi --> ConSOLIDate : Response 200 "OK" \
+        \n (with given_name, family_name)
+    ConSOLIDate -> LinkedInAuth : GET https://www.linkedin.com/oauth/openid/jwks
+    LinkedInAuth --> ConSOLIDate : Response 200 "OK" (with full payload)
+    ConSOLIDate -> User : Response 200 "OK" - Display user information
+else Client cancels authentication
+    note right of User: Client cancels authentication
+    User -> LinkedInAuth : POST (internal LinkedIn authentication cancelled handling)
+    LinkedInAuth -> User : Response 302 "Found" \
+        \n (with redirect URI to home page)
+    User -> ConSOLIDate : GET /
+    ConSOLIDate -> User : Response 200 "OK" \
+        \n (Return to home page not authenticated)
+end
+@enduml

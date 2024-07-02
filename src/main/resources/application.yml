@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: linkedin-task
+  security:
+    oauth2:
+      client:
+        registration:
+          linkedin:
+            authorization-grant-type: authorization_code
+            client-authentication-method: client_secret_post
+            client-id: ${LINKEDIN_CLIENT_ID}
+            client-name: LinkedIn
+            client-secret: ${LINKEDIN_CLIENT_SECRET}
+            redirect-uri: "http://localhost:8080/login/oauth2/code/linkedin"
+            scope: openid, profile
+
+        provider:
+          linkedin:
+            authorization-uri: https://www.linkedin.com/oauth/v2/authorization
+            jwk-set-uri: https://www.linkedin.com/oauth/openid/jwks
+            token-uri: https://www.linkedin.com/oauth/v2/accessToken
+            user-info-uri: https://api.linkedin.com/v2/userinfo

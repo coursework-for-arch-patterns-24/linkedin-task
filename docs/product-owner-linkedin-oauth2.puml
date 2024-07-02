@@ -1,0 +1,17 @@
+@startuml ConsolidateLinkedinOAuth2ProductOwner
+title Login and Authorization Process with LinkedIn
+
+actor User
+boundary ConSOLIDate
+boundary LinkedIn
+
+User -> ConSOLIDate : Client login
+ConSOLIDate -> User : Redirect to LinkedIn login prompt
+User -> LinkedIn : Authenticate and consent
+LinkedIn -> ConSOLIDate : Provide authorization code
+ConSOLIDate -> LinkedIn : Provide authorization code, client ID, client secret
+LinkedIn -> ConSOLIDate : Return access token
+ConSOLIDate -> LinkedIn : Request user information using access token
+LinkedIn -> ConSOLIDate : API response with user information
+ConSOLIDate -> User : Display user information
+@enduml

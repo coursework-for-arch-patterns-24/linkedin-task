@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ConSolidAteApplication<linkedin-task>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "edu.agh.is.consolidate.ConSolidAteApplication",
+            "projectName": "linkedin-task",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

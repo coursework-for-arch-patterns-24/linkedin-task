@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant  "Web app" as web
+participant "Con-SOLID-ate" as consolidate
+web -> consolidate++: history generation request
+activate web
+
+consolidate --> web--: accepted
+
+deactivate web
+
+web -> consolidate++: is ready?
+activate web
+
+consolidate --> web--: not yet
+deactivate web
+
+web -> consolidate++: is ready?
+activate web
+
+consolidate --> web--: ready
+deactivate web
+
+web -> consolidate++: request data
+activate web
+
+consolidate --> web--: history
+deactivate web
+@enduml
