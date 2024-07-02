@@ -29,7 +29,9 @@ public class SecurityConfig
                 .loginPage("/")
                     .authorizationEndpoint(authorization_config -> authorization_config
                         .authorizationRequestResolver(
-                            requestResolver(this.clientRegistrationRepository))));
+                            requestResolver(this.clientRegistrationRepository)))
+                    .failureUrl("/")
+                );
         return http.build();
         // clang-format on
     }
