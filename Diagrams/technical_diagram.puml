@@ -1,0 +1,26 @@
+@startuml
+actor Client
+participant "ConSOLiDate" as consolidate
+participant "LinkedIn" as ResourceServer
+
+Client -> consolidate: Go to "localhost:8080"
+consolidate -> Client: Display ConSOLIDate home page
+
+Client -> consolidate: Click Login button
+consolidate -> ResourceServer: Redirect to the LinkedIn oauth authorization endpoint (with clientID, client secret, redirect URI)
+ResourceServer -> Client: Redirect to LinkedIn login page
+Client -> ResourceServer: Login (username, password)
+
+ResourceServer -> Client: Send consent page (request user's consent)
+Client -> ResourceServer: Send consent approval
+ResourceServer -> consolidate: Redirect with Authorization code
+
+consolidate -> ResourceServer: Exchange authorization code for access token
+ResourceServer -> consolidate: Return and refresh access token
+
+consolidate -> ResourceServer: Request client's profile information (token, request payload)
+ResourceServer -> consolidate: Validate token and return client's profile information
+consolidate -> Client: Display profile information
+
+
+@enduml

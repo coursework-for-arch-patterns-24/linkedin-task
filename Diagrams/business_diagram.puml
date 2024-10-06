@@ -1,0 +1,20 @@
+@startuml
+
+
+actor Client
+participant "ConSOLiDate" as consolidate
+participant "LinkedIn" as ResourceServer
+
+Client -> consolidate: Open ConSOLIDate home page
+consolidate -> Client: Display home page
+
+Client -> consolidate: Click Login button
+consolidate -> ResourceServer: Login through LinkedIn
+ResourceServer -> Client: Ask for consent
+Client -> ResourceServer: Send consent approval
+
+ResourceServer -> consolidate: Login successful
+consolidate -> Client: Display profile information
+
+
+@enduml
