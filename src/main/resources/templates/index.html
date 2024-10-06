@@ -169,10 +169,10 @@
     </header>
 
     <main class="px-3">
-        <h1 sec:authorize="!isAuthenticated()">Click the button below to log in by LinkedIn or Google account.</h1><br>
+        <h1 sec:authorize="!isAuthenticated()">Click the button below to log in by LinkedIn.</h1><br>
         <h1 sec:authorize="isAuthenticated()">Click the button below to see your profile!</h1><br>
         <p class="lead">
-            <a sec:authorize="!isAuthenticated()" th:href="@{/oauth2/authorization/auth0}" class="btn btn-lg btn-light fw-bold border-white bg-white">Log in</a>
+            <a sec:authorize="!isAuthenticated()" th:href="@{/oauth2/authorization/linkedin}" class="btn btn-lg btn-light fw-bold border-white bg-white">Log in</a>
             <a sec:authorize="isAuthenticated()" th:href="@{/profile}" class="btn btn-lg btn-light fw-bold border-white bg-white">Profile</a>
         </p>
     </main>

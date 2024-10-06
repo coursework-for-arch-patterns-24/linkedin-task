@@ -3,20 +3,17 @@
 
 actor Client
 participant "ConSOLiDate" as consolidate
-participant "3rd party OAUTH provider" as OauthServer
-participant "Resource Server" as ResourceServer
+participant "LinkedIn" as ResourceServer
 
-Client -> consolidate: Try to login through OAUTH (LinkedIn)
-consolidate -> OauthServer: Authorize web app (consolidate)
+Client -> consolidate: Open ConSOLIDate home page
+consolidate -> Client: Display home page
 
-OauthServer -> Client: Consent page (request user's consent)
-Client -> OauthServer: Consent approval
-OauthServer -> consolidate: Consent given
-consolidate -> Client: Successfully logged in
+Client -> consolidate: Click Login button
+consolidate -> ResourceServer: Login through LinkedIn
+ResourceServer -> Client: Ask for consent
+Client -> ResourceServer: Send consent approval
 
-Client -> consolidate: Show me profile information
-consolidate -> ResourceServer: Get profile information
-ResourceServer -> consolidate: Return profile information
+ResourceServer -> consolidate: Login successful
 consolidate -> Client: Display profile information
 
 
